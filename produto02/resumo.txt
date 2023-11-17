@@ -1,0 +1,38 @@
+(SYSCALL)
+    A convenção para chamadas de sistemas é:
+
+    1. r0–r6: Serve para passar parametros de entrada que servem para auxiliar a chamada ao sistema
+    2. r7: Serve para informar qual o tipo de chamada de sistema que quero fazer.
+    3. Utilizamos SVC 0 para forçar a interrupção pela chamada de sistema ao linux.
+    4. R0: O retorno da chamada é armazenado em R0. Recebe um número positivo especifico se der certo e um negativo se der errado
+    qualquer número negativo significa que deu algum erro. Por exemplo, após chamar um syscall para abrir um arquivo, r0 terá o número 
+    descritor do arquivo (caso tenha conseguido abrir), que é um número positivo, ou algum número negativo (caso não tenha conseguido) 
+
+
+(GPIO)
+
+
+(LCD)
+Comunicação feita com 4 bits, usando os pinos db4, db5, db6 e db7. Quanto à ordem de transferência de dados, os quatro bits de ordem alta 
+(para operação de 8 bits, DB4 a DB7) são transferidos antes dos quatro bits de ordem baixa (para operação de 8 bits, DB0 a DB3).
+
+Ou seja para dar uma instrução devo colocar rs em low, e r/w em low, jogar os bits mais altos da instrução [7:3] em d7 a db4
+e dar o pulso enable. colocar a parte mais baixa da insntrução [3:0] em db7 a db4 e dar outro pulso enable
+depois eu veriifico o sinalizador ocupado
+
+
+O HD44780U tem dois registros de 8 bits, um registro de instruções (IR) e um registro de dados (DR). 
+O IR armazena códigos de instrução, como limpar o visor e deslocar o cursor, e informações de endereço para a RAM de 
+dados do visor (DDRAM) e a RAM do gerador de caracteres (CGRAM). O IR só pode ser gravado a partir da MPU
+
+
+Números começam com 0011, a parte baixa é o numero em binario.Ex, 0011 1001 imprimie o digito 9; 0011 0011 imprime o digito 3
+
+
+(UART)
+
+
+(VISÃO GERAL DO PROJETO)
+
+(REGRAS E PADRÕES)
+- Os regs r0 a r4 são apenas para parametros e retornos de funções
