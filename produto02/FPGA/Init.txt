@@ -1,0 +1,1 @@
+Arquivo para inicializar a pasta no Github.
